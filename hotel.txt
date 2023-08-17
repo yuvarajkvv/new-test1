@@ -1,0 +1,53 @@
+class MenuItem:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class Menu:
+    def __init__(self):
+        self.menu_items = []
+
+    def add_item(self, item):
+        self.menu_items.append(item)
+
+    def display_menu(self):
+        print("Menu:")
+        for idx, item in enumerate(self.menu_items, start=1):
+            print(f"{idx}. {item.name} - ₹{item.price:.2f}")
+
+class Hotel:
+    def __init__(self, name, opening_time, closing_time):
+        self.name = name
+        self.opening_time = opening_time
+        self.closing_time = closing_time
+        self.menu = Menu()
+
+    def is_open(self, current_time):
+        return self.opening_time <= current_time < self.closing_time
+
+    def display_menu(self):
+        self.menu.display_menu()
+
+def main():
+    hotel = Hotel("Sample Hotel", 9, 22)  # Hotel opens at 9 AM and closes at 10 PM
+
+    menu = Menu()
+    menu.add_item(MenuItem("Burger", 149))
+    menu.add_item(MenuItem("Pizza", 199))
+    menu.add_item(MenuItem("Salad", 120))
+    menu.add_item(MenuItem("Choclate lava cake", 90))
+    menu.add_item(MenuItem("coke", 50))
+    menu.add_item(MenuItem("water bottle", 20))
+    
+    hotel.menu = menu
+
+    current_time = int(input("Enter current time (24-hour format): "))
+
+    if hotel.is_open(current_time):
+        print(f"{hotel.name} is open!")
+        hotel.display_menu()
+    else:
+        print(f"{hotel.name} is closed at the moment.")
+
+if __name__ == "__main__":
+    main()

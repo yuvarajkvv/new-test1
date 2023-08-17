@@ -1,0 +1,38 @@
+class BusTiming:
+    def __init__(self, destination, timings):
+        self.destination = destination
+        self.timings = timings
+
+class BusSchedule:
+    def __init__(self):
+        self.timings_dict = {}
+
+    def add_timing(self, destination, timings):
+        self.timings_dict[destination] = BusTiming(destination, timings)
+
+    def get_timings(self, destination):
+        if destination in self.timings_dict:
+            return self.timings_dict[destination].timings
+        else:
+            return None
+
+def main():
+    bus_schedule = BusSchedule()
+
+    bus_schedule.add_timing("NELLORE TO CHENNAI", ["09:00 AM", "12:30 PM", "03:45 PM"])
+    bus_schedule.add_timing("ONGOLE TO MADURAI", ["10:15 AM", "01:45 PM", "04:30 PM"])
+    bus_schedule.add_timing("MADURAI TO KRISHNANKOIL", ["11:30 AM", "02:15 PM", "05:00 PM"])
+    bus_schedule.add_timing("CHENNAI TO MADURAI",["12:00AM","10:00PM","11:00PM"])
+    bus_schedule.add_timing("CHENNAI TO KRISHNANKOIL",["12:00AM","10:00PM","11:00PM"])
+
+    destination = input("Enter destination: ")
+
+    timings = bus_schedule.get_timings(destination)
+
+    if timings:
+        print(f"Bus timings for {destination}: {', '.join(timings)}")
+    else:
+        print("Sorry, no timings available for the entered destination.")
+
+if __name__ == "__main__":
+    main()
